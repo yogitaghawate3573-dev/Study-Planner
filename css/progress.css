@@ -1,0 +1,203 @@
+/* Progress Overview Specific Styles */
+
+.progress-summary-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 34px 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.progress-summary-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: #cbd5e1;
+}
+
+/* SVG Circular Gauge */
+.gauge-wrapper {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    display: grid;
+    place-items: center;
+    margin-bottom: 16px;
+}
+
+.progress-svg-gauge {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.gauge-bg {
+    fill: none;
+    stroke: #edf2f7;
+    stroke-width: 13;
+}
+
+.gauge-fill {
+    fill: none;
+    stroke: url(#gaugeGradient);
+    stroke-width: 13;
+    stroke-linecap: round;
+    stroke-dasharray: 414.69;
+    stroke-dashoffset: 100;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gauge-text-content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+.gauge-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.gauge-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 4px;
+}
+
+.progress-summary-card h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text);
+    margin-bottom: 4px;
+}
+
+.gauge-sub {
+    font-size: 12.5px;
+    color: var(--muted);
+    max-width: 320px;
+    line-height: 1.45;
+    margin-bottom: 16px;
+}
+
+.gauge-footer-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 14px;
+    border-radius: var(--radius-full);
+    background: var(--primary-light);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.gauge-footer-pill b {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* KPI Cards */
+.kpi-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.kpi-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: var(--transition);
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: #cbd5e1;
+}
+
+.kpi-icon-wrap {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.kpi-icon-wrap.green {
+    background: var(--green-light);
+    color: var(--green);
+}
+
+.kpi-icon-wrap.orange {
+    background: var(--orange-light);
+    color: var(--orange);
+}
+
+.kpi-icon-wrap.blue {
+    background: var(--blue-light);
+    color: var(--blue);
+}
+
+.kpi-icon-wrap.purple {
+    background: var(--purple-light);
+    color: var(--purple);
+}
+
+.kpi-info small {
+    display: block;
+    color: var(--muted);
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 2px;
+}
+
+.kpi-info b {
+    display: block;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1.1;
+    letter-spacing: -0.5px;
+}
+
+.kpi-sub {
+    font-size: 11px;
+    color: var(--muted-light);
+    margin-top: 2px;
+    display: block;
+}
+
+@media (max-width: 900px) {
+    .kpi-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .kpi-container {
+        grid-template-columns: 1fr;
+    }
+}

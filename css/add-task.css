@@ -1,0 +1,187 @@
+/* Add Task Specific Styles */
+
+.add-task-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.add-task-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 30px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-subtle);
+}
+
+.form-header h2 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-with-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.field-icon {
+    position: absolute;
+    left: 14px;
+    color: var(--muted);
+    pointer-events: none;
+    width: 17px;
+    height: 17px;
+}
+
+.input-with-icon input, 
+.input-with-icon select {
+    padding-left: 42px;
+}
+
+/* Priority Selector */
+.priority-picker {
+    display: flex;
+    gap: 8px;
+}
+
+.prio-pill {
+    flex: 1;
+    cursor: pointer;
+}
+
+.prio-pill input {
+    display: none;
+}
+
+.prio-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--line);
+    background: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.prio-pill input:checked + .prio-badge.blue {
+    background: var(--blue-light);
+    color: var(--blue);
+    border-color: var(--blue-border);
+}
+
+.prio-pill input:checked + .prio-badge.orange {
+    background: var(--orange-light);
+    color: var(--orange);
+    border-color: var(--orange-border);
+}
+
+.prio-pill input:checked + .prio-badge.red {
+    background: var(--red-light);
+    color: var(--red);
+    border-color: var(--red-border);
+}
+
+.add-task-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 26px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line-subtle);
+}
+
+/* Productivity Guidance Card */
+.tip-card {
+    padding: 26px;
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+}
+
+.tip-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line-subtle);
+}
+
+.tip-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.tip-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.tip-header small {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.tip-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.tip-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.tip-item i {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.tip-item b {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+}
+
+.tip-item p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+@media (max-width: 1024px) {
+    .add-task-grid {
+        grid-template-columns: 1fr;
+    }
+}

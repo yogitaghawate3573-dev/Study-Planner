@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Progress | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/progress.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html"><span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span><span>Dashboard</span></a>
+                <a href="subjects.html"><span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span><span>Subjects</span></a>
+                <a href="tasks.html"><span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span><span>Tasks</span></a>
+                <a href="schedule.html"><span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span><span>Schedule</span></a>
+                <a class="active" href="progress.html"><span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span><span>Progress</span></a>
+                <a href="reports.html"><span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span><span>Reports</span></a>
+                <a href="profile.html"><span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span><span>Profile</span></a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout();return false"><span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <div class="top">
+                <div>
+                    <h1>Academic Progress Analytics</h1>
+                    <p>Track your syllabus mastery, study velocities, and completion milestones.</p>
+                </div>
+                <div class="top-right">
+                    <select class="search" style="width: 150px;" onchange="toast('Filtered by ' + this.value)">
+                        <option>This Semester</option>
+                        <option>This Month</option>
+                        <option>This Week</option>
+                    </select>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Two Columns layout -->
+            <div class="grid cols2">
+                <!-- Left circular progress card -->
+                <div class="progress-summary-card">
+                    <div class="gauge-wrapper">
+                        <svg class="progress-svg-gauge" viewBox="0 0 160 160">
+                            <defs>
+                                <linearGradient id="gaugeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#664ffb" />
+                                    <stop offset="100%" stop-color="#4d33ea" />
+                                </linearGradient>
+                            </defs>
+                            <circle class="gauge-bg" cx="80" cy="80" r="66" />
+                            <circle class="gauge-fill" id="svgGaugeFill" cx="80" cy="80" r="66" />
+                        </svg>
+                        <div class="gauge-text-content">
+                            <span class="gauge-number" id="progressRingText">78%</span>
+                            <span class="gauge-label">Mastery</span>
+                        </div>
+                    </div>
+                    
+                    <h2 id="progressSummaryText">Great Pace! Keep It Up 🎉</h2>
+                    <span class="gauge-sub">Overall Academic Completion across all enrolled modules</span>
+                    
+                    <div class="gauge-footer-pill">
+                        <i data-lucide="target" style="width: 14px; height: 14px; color: var(--primary);"></i>
+                        <span>Semester Target: <b>85%</b> by Final Week</span>
+                    </div>
+                </div>
+
+                <!-- Right details bar lists -->
+                <div class="card">
+                    <div class="section" style="margin-bottom: 20px;">
+                        <h2><i data-lucide="layers" style="width: 18px; height: 18px; color: var(--primary);"></i> Subject-wise Performance</h2>
+                        <a class="view" href="subjects.html">Manage Subjects <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></a>
+                    </div>
+                    <div id="subjectProgressContainer">
+                        <!-- Loaded Dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- KPI Metric blocks -->
+            <div class="kpi-container">
+                <div class="kpi-card">
+                    <div class="kpi-icon-wrap green">
+                        <i data-lucide="check-circle-2"></i>
+                    </div>
+                    <div class="kpi-info">
+                        <small>Completed Tasks</small>
+                        <b id="kpiCompleted">24</b>
+                        <span class="kpi-sub">Across all courses</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon-wrap orange">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <div class="kpi-info">
+                        <small>Pending Tasks</small>
+                        <b id="kpiPending">8</b>
+                        <span class="kpi-sub">On active schedule</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon-wrap blue">
+                        <i data-lucide="hourglass"></i>
+                    </div>
+                    <div class="kpi-info">
+                        <small>Estimated Study Hours</small>
+                        <b id="kpiHours">36 hrs</b>
+                        <span class="kpi-sub">Total time invested</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon-wrap purple">
+                        <i data-lucide="award"></i>
+                    </div>
+                    <div class="kpi-info">
+                        <small>Mastery Efficiency</small>
+                        <b>88%</b>
+                        <span class="kpi-sub">Consistent study streak</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/progress.js"></script>
+</body>
+</html>

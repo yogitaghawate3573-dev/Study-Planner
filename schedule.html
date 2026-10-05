@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Schedule | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/schedule.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html"><span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span><span>Dashboard</span></a>
+                <a href="subjects.html"><span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span><span>Subjects</span></a>
+                <a href="tasks.html"><span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span><span>Tasks</span></a>
+                <a class="active" href="schedule.html"><span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span><span>Schedule</span></a>
+                <a href="progress.html"><span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span><span>Progress</span></a>
+                <a href="reports.html"><span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span><span>Reports</span></a>
+                <a href="profile.html"><span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span><span>Profile</span></a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout();return false"><span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <div class="top">
+                <div>
+                    <h1>Study Timetable & Schedule</h1>
+                    <p>Plan weekly lectures, lab sessions, and dedicated revision blocks.</p>
+                </div>
+                <div class="top-right">
+                    <button class="btn" onclick="openModal('sessionModal')">
+                        <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add Session
+                    </button>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Calendar Container Card -->
+            <div class="card" style="padding: 24px;">
+                <div class="calendar-toolbar">
+                    <div class="calendar-title-group">
+                        <div class="cal-nav-buttons">
+                            <button class="cal-btn-icon" onclick="toast('Showing Current Week')"><i data-lucide="chevron-left"></i></button>
+                            <button class="cal-btn-icon" onclick="toast('Showing Next Week')"><i data-lucide="chevron-right"></i></button>
+                        </div>
+                        <h2>August 2026 <span class="cal-badge">Week 34</span></h2>
+                    </div>
+
+                    <div class="calendar-controls">
+                        <div class="view-switchers">
+                            <button class="view-tab" onclick="switchCalView(this, 'Month')">Month</button> 
+                            <button class="view-tab active" onclick="switchCalView(this, 'Week')">Week</button> 
+                            <button class="view-tab" onclick="switchCalView(this, 'Day')">Day</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="calendar-scroll-container">
+                    <div class="calendar">
+                        <!-- Calendar Headers -->
+                        <div class="cal-head">
+                            <div class="time-header">Time</div>
+                            <div class="day-col">Mon <span class="cal-date">24 Aug</span></div>
+                            <div class="day-col active-today">
+                                <span class="today-tag">Today</span>
+                                Tue <span class="cal-date">25 Aug</span>
+                            </div>
+                            <div class="day-col">Wed <span class="cal-date">26 Aug</span></div>
+                            <div class="day-col">Thu <span class="cal-date">27 Aug</span></div>
+                            <div class="day-col">Fri <span class="cal-date">28 Aug</span></div>
+                            <div class="day-col weekend">Sat <span class="cal-date">29 Aug</span></div>
+                            <div class="day-col weekend">Sun <span class="cal-date">30 Aug</span></div>
+                        </div>
+
+                        <!-- Calendar Grid Body (Rendered via schedule.js) -->
+                        <div class="cal-body" id="calendarBody">
+                            <!-- Dynamic Schedule Rows -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Study Session Modal -->
+            <div id="sessionModal" class="modal-backdrop">
+                <div class="modal">
+                    <div class="section" style="margin-bottom: 20px;">
+                        <h2><i data-lucide="calendar-plus" style="width: 20px; height: 20px; color: var(--primary);"></i> Add Timetable Session</h2>
+                        <button class="btn white" onclick="closeModal('sessionModal')" style="padding: 6px; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+                        </button>
+                    </div>
+
+                    <form onsubmit="handleSaveSession(event)">
+                        <div class="field">
+                            <label>Subject Course</label>
+                            <select name="subject" id="sessionSubjectSelect" required>
+                                <option>Database Management System</option>
+                                <option>Java Programming</option>
+                                <option>Computer Networks</option>
+                                <option>Operating Systems</option>
+                                <option>Web Development</option>
+                                <option>Mathematics</option>
+                            </select>
+                        </div>
+
+                        <div class="field">
+                            <label>Topic / Session Title</label>
+                            <input name="title" placeholder="e.g. Lab Revision / Chapter 3 Practice" required>
+                        </div>
+
+                        <div class="form2">
+                            <div class="field">
+                                <label>Day of Week</label>
+                                <select name="day" required>
+                                    <option value="Mon">Monday</option>
+                                    <option value="Tue" selected>Tuesday (Today)</option>
+                                    <option value="Wed">Wednesday</option>
+                                    <option value="Thu">Thursday</option>
+                                    <option value="Fri">Friday</option>
+                                    <option value="Sat">Saturday</option>
+                                    <option value="Sun">Sunday</option>
+                                </select>
+                            </div>
+
+                            <div class="field">
+                                <label>Time Slot</label>
+                                <select name="timeSlot" required>
+                                    <option value="09:00 AM">09:00 - 10:00 AM</option>
+                                    <option value="10:00 AM" selected>10:00 - 11:00 AM</option>
+                                    <option value="11:00 AM">11:00 - 12:00 PM</option>
+                                    <option value="12:00 PM">12:00 - 01:00 PM</option>
+                                    <option value="02:00 PM">02:00 - 03:00 PM</option>
+                                    <option value="03:00 PM">03:00 - 04:00 PM</option>
+                                    <option value="04:00 PM">04:00 - 05:00 PM</option>
+                                    <option value="05:00 PM">05:00 - 06:00 PM</option>
+                                    <option value="06:00 PM">06:00 - 07:00 PM</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Color Badge</label>
+                            <select name="color">
+                                <option value="primary">Purple (Core)</option>
+                                <option value="blue">Blue (Theory)</option>
+                                <option value="green">Green (Lab/Practical)</option>
+                                <option value="orange">Orange (Assignment)</option>
+                            </select>
+                        </div>
+
+                        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+                            <button type="button" class="btn white" onclick="closeModal('sessionModal')">Cancel</button>
+                            <button type="submit" class="btn">
+                                <i data-lucide="check" style="width: 15px; height: 15px;"></i> Add to Schedule
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/schedule.js"></script>
+</body>
+</html>

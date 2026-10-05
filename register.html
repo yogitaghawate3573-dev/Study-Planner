@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Register | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/register.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="auth-page">
+        <!-- Left Side content (scenic graphic overlay & typography copy) -->
+        <section class="auth-left">
+            <div class="auth-brand">
+                <div class="auth-brand-logo">
+                    <i data-lucide="book-open" style="width: 22px; height: 22px; stroke-width: 2.5px;"></i>
+                </div>
+                <div>
+                    <h2>Study Planner</h2>
+                    <p>Plan. Study. Achieve.</p>
+                </div>
+            </div>
+
+            <div class="hero-copy">
+                <div class="hero-tag">
+                    <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Intelligent Academic Assistant
+                </div>
+                <h1>Plan your study.<br>Track your progress.<br><span>Achieve</span> your goals.</h1>
+                <p>Stay effortlessly organized, manage deadlines, and unlock your true academic potential with real-time analytics.</p>
+                
+                <div class="hero-badges">
+                    <div class="hero-pill">
+                        <i data-lucide="check-circle" style="width: 15px; height: 15px; color: var(--green);"></i> Fast Free Setup
+                    </div>
+                    <div class="hero-pill">
+                        <i data-lucide="award" style="width: 15px; height: 15px; color: var(--primary);"></i> Built for Students
+                    </div>
+                    <div class="hero-pill">
+                        <i data-lucide="shield-check" style="width: 15px; height: 15px; color: var(--blue);"></i> 100% Private
+                    </div>
+                </div>
+            </div>
+
+            <div class="secure-badge">
+                <div class="secure-icon">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div>
+                    <strong>Your Progress is Always Saved</strong>
+                    <span>Instant client-side persistence for fast, uninterrupted study.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Side content (glassmorphism register card) -->
+        <section class="auth-right">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="auth-logo">
+                        <i data-lucide="graduation-cap" style="width: 24px; height: 24px; stroke-width: 2.2px;"></i>
+                    </div>
+                    <h1>Create Account ✨</h1>
+                    <p>Set up your profile to start planning your studies</p>
+                </div>
+                
+                <form id="registerForm" class="auth-form" onsubmit="handleRegister(event)">
+                    <div class="input-grid">
+                        <div class="field">
+                            <label>Full Name *</label>
+                            <div class="input-group">
+                                <i data-lucide="user" class="input-icon"></i>
+                                <input id="regName" name="name" type="text" required placeholder="e.g. Yogita Ghawate">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Student ID *</label>
+                            <div class="input-group">
+                                <i data-lucide="hash" class="input-icon"></i>
+                                <input id="regStudentId" name="studentId" type="text" required placeholder="e.g. STU20240041">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-grid">
+                        <div class="field">
+                            <label>Email Address *</label>
+                            <div class="input-group">
+                                <i data-lucide="mail" class="input-icon"></i>
+                                <input id="regEmail" name="email" type="email" required placeholder="name@college.edu">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Course Program</label>
+                            <div class="input-group">
+                                <i data-lucide="book" class="input-icon"></i>
+                                <select id="regCourse" name="course">
+                                    <option value="Bachelor of Computer Applications (BCA)">BCA</option>
+                                    <option value="B.Tech Computer Science (CSE)">B.Tech CSE</option>
+                                    <option value="B.Sc Information Technology">B.Sc IT</option>
+                                    <option value="Master of Computer Applications (MCA)">MCA</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="input-grid">
+                        <div class="field">
+                            <label>Current Semester</label>
+                            <div class="input-group">
+                                <i data-lucide="calendar" class="input-icon"></i>
+                                <select id="regSemester" name="semester">
+                                    <option value="4th Semester">4th Semester</option>
+                                    <option value="1st Semester">1st Semester</option>
+                                    <option value="2nd Semester">2nd Semester</option>
+                                    <option value="3rd Semester">3rd Semester</option>
+                                    <option value="5th Semester">5th Semester</option>
+                                    <option value="6th Semester">6th Semester</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Password *</label>
+                            <div class="input-group">
+                                <i data-lucide="lock" class="input-icon"></i>
+                                <input id="reg_password" name="password" required type="password" placeholder="At least 6 chars">
+                                <button type="button" class="password-toggle" onclick="togglePassword('reg_password', this)" title="Show/Hide Password">
+                                    <i data-lucide="eye" style="width: 18px; height: 18px;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label>Confirm Password *</label>
+                        <div class="input-group">
+                            <i data-lucide="shield-check" class="input-icon"></i>
+                            <input id="reg_confirm_password" required type="password" placeholder="Re-enter password">
+                            <button type="button" class="password-toggle" onclick="togglePassword('reg_confirm_password', this)" title="Show/Hide Password">
+                                <i data-lucide="eye" style="width: 18px; height: 18px;"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="terms-check">
+                        <label>
+                            <input type="checkbox" required checked> I agree to the <a href="#" onclick="toast('Terms: Demo student planner usage.', 'info', 'Terms & Privacy'); return false;">Terms of Service</a> & <a href="#" onclick="toast('Privacy: Data is kept safe in your browser.', 'info', 'Privacy Policy'); return false;">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="auth-submit">
+                        <i data-lucide="user-plus" style="width: 16px; height: 16px;"></i> Create Free Account
+                    </button>
+                </form>
+                
+                <div class="auth-footer">
+                    Already have an account? <a href="login.html">Login</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>

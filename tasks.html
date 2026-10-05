@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Tasks | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/tasks.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html"><span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span><span>Dashboard</span></a>
+                <a href="subjects.html"><span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span><span>Subjects</span></a>
+                <a class="active" href="tasks.html"><span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span><span>Tasks</span></a>
+                <a href="schedule.html"><span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span><span>Schedule</span></a>
+                <a href="progress.html"><span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span><span>Progress</span></a>
+                <a href="reports.html"><span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span><span>Reports</span></a>
+                <a href="profile.html"><span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span><span>Profile</span></a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout();return false"><span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <div class="top">
+                <div>
+                    <h1>Study Tasks & Assignments</h1>
+                    <p>Track your academic assignments, lab records, and syllabus deadlines.</p>
+                </div>
+                <div class="top-right">
+                    <a class="btn" href="add-task.html">
+                        <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add New Task
+                    </a>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Task Metric Chips -->
+            <div class="task-summary-ribbon">
+                <div class="task-summary-pill" onclick="setStatusTab('All')">
+                    <span class="dot all"></span>
+                    <small>Total Tasks</small>
+                    <b id="summaryTotal">0</b>
+                </div>
+                <div class="task-summary-pill" onclick="setStatusTab('Pending')">
+                    <span class="dot pending"></span>
+                    <small>Pending</small>
+                    <b id="summaryPending">0</b>
+                </div>
+                <div class="task-summary-pill" onclick="setStatusTab('Completed')">
+                    <span class="dot completed"></span>
+                    <small>Completed</small>
+                    <b id="summaryCompleted">0</b>
+                </div>
+                <div class="task-summary-pill" onclick="setPriorityFilter('High')">
+                    <span class="dot high"></span>
+                    <small>High Priority</small>
+                    <b id="summaryHigh">0</b>
+                </div>
+            </div>
+
+            <!-- Tasks Table Card -->
+            <div class="card" style="padding: 24px;">
+                <div class="tasks-toolbar">
+                    <!-- Segmented Status Tabs -->
+                    <div class="status-tabs">
+                        <button class="status-tab active" data-status="All" onclick="setStatusTab('All')">All Tasks</button>
+                        <button class="status-tab" data-status="Pending" onclick="setStatusTab('Pending')">Pending</button>
+                        <button class="status-tab" data-status="Completed" onclick="setStatusTab('Completed')">Completed</button>
+                    </div>
+
+                    <!-- Dropdown Filters & Search -->
+                    <div class="tasks-filter-group">
+                        <select id="taskSubjectFilter" onchange="renderTasks()" class="search" style="min-width: 150px;">
+                            <option value="All">All Subjects</option>
+                        </select>
+
+                        <select id="taskPriorityFilter" onchange="renderTasks()" class="search" style="min-width: 130px;">
+                            <option value="All">All Priorities</option>
+                            <option value="High">High Priority</option>
+                            <option value="Medium">Medium Priority</option>
+                            <option value="Low">Low Priority</option>
+                        </select>
+                        
+                        <div class="tasks-search-wrapper">
+                            <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+                            <input id="taskSearch" class="search" placeholder="Search tasks..." oninput="renderTasks()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 48px;">Done</th>
+                                <th>Task Detail</th>
+                                <th>Subject</th>
+                                <th>Due Date</th>
+                                <th>Priority</th>
+                                <th>Status</th>
+                                <th style="text-align: right;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taskBody">
+                            <!-- Loaded Dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/tasks.js"></script>
+</body>
+</html>

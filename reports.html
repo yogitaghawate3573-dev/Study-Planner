@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Reports | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/reports.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html"><span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span><span>Dashboard</span></a>
+                <a href="subjects.html"><span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span><span>Subjects</span></a>
+                <a href="tasks.html"><span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span><span>Tasks</span></a>
+                <a href="schedule.html"><span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span><span>Schedule</span></a>
+                <a href="progress.html"><span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span><span>Progress</span></a>
+                <a class="active" href="reports.html"><span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span><span>Reports</span></a>
+                <a href="profile.html"><span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span><span>Profile</span></a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout();return false"><span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <!-- Formal Print Header (Visible only on window.print()) -->
+            <div class="print-header">
+                <h2>Study Planner Academic Performance Report</h2>
+                <p>Student: <b>Yogita Ghawate</b> | Enrollment: <b>STU20240041</b> | Program: <b>BCA 4th Semester</b></p>
+                <small>Generated on: <span id="printDate">25 August 2026</span></small>
+            </div>
+
+            <div class="top">
+                <div>
+                    <h1>Reports & Analytics</h1>
+                    <p>Quantitative audit of your study hours, task distributions, and productivity trends.</p>
+                </div>
+                <div class="top-right">
+                    <select class="search" style="width: 140px;" onchange="toast('Timeframe updated: ' + this.value)">
+                        <option>This Month</option>
+                        <option>This Week</option>
+                        <option>All-Time</option>
+                    </select>
+                    <button class="btn" onclick="window.print()">
+                        <i data-lucide="printer" style="width: 16px; height: 16px;"></i> Print / Save Report
+                    </button>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Chart columns layout -->
+            <div class="grid cols2">
+                <div class="card">
+                    <div class="section" style="margin-bottom: 20px;">
+                        <h2><i data-lucide="clock" style="width: 18px; height: 18px; color: var(--primary);"></i> Study Hours (Weekly Trend)</h2>
+                        <span class="pill blue" style="font-size: 11px;">Average: 4.8 hrs/day</span>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">3.5h</span>
+                            <div class="chart-bar" style="height: 52%"></div>
+                            <span>Mon</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">4.8h</span>
+                            <div class="chart-bar" style="height: 72%"></div>
+                            <span>Tue</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">6.0h</span>
+                            <div class="chart-bar" style="height: 90%"></div>
+                            <span>Wed</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">4.2h</span>
+                            <div class="chart-bar" style="height: 62%"></div>
+                            <span>Thu</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">5.2h</span>
+                            <div class="chart-bar" style="height: 78%"></div>
+                            <span>Fri</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">3.0h</span>
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <span>Sat</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">2.2h</span>
+                            <div class="chart-bar" style="height: 34%"></div>
+                            <span>Sun</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card ratio-card">
+                    <div class="section" style="width: 100%; margin-bottom: 16px;">
+                        <h2><i data-lucide="pie-chart" style="width: 18px; height: 18px; color: var(--orange);"></i> Tasks Distribution</h2>
+                        <span class="pill green" style="font-size: 11px;">Efficiency Ratio</span>
+                    </div>
+                    
+                    <div class="donut-wrapper">
+                        <div class="ratio-ring" id="ratioRing">
+                            <div class="ratio-inner">
+                                <span class="ratio-ring-text" id="ratioText">78%</span>
+                                <small>Completion</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="donut-legend">
+                        <span class="pill green" id="legendCompleted">Completed (24)</span> 
+                        <span class="pill orange" id="legendPending">Pending (8)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject progress and Monthly Productivity -->
+            <div class="grid cols2">
+                <div class="card">
+                    <div class="section" style="margin-bottom: 20px;">
+                        <h2><i data-lucide="book-open" style="width: 18px; height: 18px; color: var(--green);"></i> Subject-wise Progress</h2>
+                        <a class="view" href="subjects.html">All Courses <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></a>
+                    </div>
+                    <div id="reportSubjectList">
+                        <!-- Loaded Dynamically -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="section" style="margin-bottom: 20px;">
+                        <h2><i data-lucide="trending-up" style="width: 18px; height: 18px; color: var(--primary);"></i> Monthly Productivity Index</h2>
+                        <span class="pill purple" style="font-size: 11px;">Semester Curve</span>
+                    </div>
+                    <div class="chart-container">
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">30%</span>
+                            <div class="chart-bar" style="height: 30%"></div>
+                            <span>Jan</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">45%</span>
+                            <div class="chart-bar" style="height: 45%"></div>
+                            <span>Feb</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">55%</span>
+                            <div class="chart-bar" style="height: 55%"></div>
+                            <span>Mar</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">66%</span>
+                            <div class="chart-bar" style="height: 66%"></div>
+                            <span>Apr</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">78%</span>
+                            <div class="chart-bar" style="height: 78%"></div>
+                            <span>May</span>
+                        </div>
+                        <div class="chart-bar-wrapper">
+                            <span class="chart-val">90%</span>
+                            <div class="chart-bar" style="height: 90%"></div>
+                            <span>Jun</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/reports.js"></script>
+</body>
+</html>

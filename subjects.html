@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Subjects | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/subjects.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html"><span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span><span>Dashboard</span></a>
+                <a class="active" href="subjects.html"><span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span><span>Subjects</span></a>
+                <a href="tasks.html"><span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span><span>Tasks</span></a>
+                <a href="schedule.html"><span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span><span>Schedule</span></a>
+                <a href="progress.html"><span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span><span>Progress</span></a>
+                <a href="reports.html"><span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span><span>Reports</span></a>
+                <a href="profile.html"><span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span><span>Profile</span></a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout();return false"><span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <div class="top">
+                <div>
+                    <h1>Academic Subjects</h1>
+                    <p>Organize course modules, manage syllabus tasks, and monitor completion rates.</p>
+                </div>
+                <div class="top-right">
+                    <button class="btn" onclick="openModal('subjectModal')">
+                        <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add Subject
+                    </button>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Subject Overview Ribbon -->
+            <div class="subject-overview-card">
+                <div class="overview-stats">
+                    <div class="stat-item">
+                        <small>Total Enrolled</small>
+                        <b id="subjectCountText">6 Subjects</b>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <small>Total Modules Done</small>
+                        <b id="subjectTasksDoneText">98 / 125 Tasks</b>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div class="stat-item">
+                        <small>Average Completion</small>
+                        <b id="subjectAvgCompletionText" style="color: var(--primary);">78%</b>
+                    </div>
+                </div>
+
+                <div class="subject-search-wrapper">
+                    <i data-lucide="search" style="width: 16px; height: 16px;"></i>
+                    <input id="subjectSearch" class="search" placeholder="Search subjects..." oninput="filterSubjects()">
+                </div>
+            </div>
+
+            <!-- Subject Cards Grid -->
+            <div id="subjectList" class="subject-grid">
+                <!-- Loaded Dynamically -->
+            </div>
+
+            <!-- Add Subject Modal -->
+            <div id="subjectModal" class="modal-backdrop">
+                <div class="modal">
+                    <div class="section" style="margin-bottom: 20px;">
+                        <h2><i data-lucide="book-plus" style="width: 20px; height: 20px; color: var(--primary);"></i> Add Academic Subject</h2>
+                        <button class="btn white" onclick="closeModal('subjectModal')" style="padding: 6px; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+                        </button>
+                    </div>
+                    <form onsubmit="addSubject(event)">
+                        <div class="field">
+                            <label>Subject Title</label>
+                            <input name="name" required placeholder="e.g. Artificial Intelligence & Machine Learning">
+                        </div>
+                        
+                        <div class="field">
+                            <label>Estimated Total Tasks / Topics</label>
+                            <input name="total" type="number" min="1" max="100" value="15" required>
+                        </div>
+
+                        <div class="field">
+                            <label>Subject Accent Color</label>
+                            <div class="color-picker-group">
+                                <label class="color-pill"><input type="radio" name="color" value="blue" checked><span class="color-dot blue"></span> Blue</label>
+                                <label class="color-pill"><input type="radio" name="color" value="green"><span class="color-dot green"></span> Green</label>
+                                <label class="color-pill"><input type="radio" name="color" value="orange"><span class="color-dot orange"></span> Orange</label>
+                                <label class="color-pill"><input type="radio" name="color" value="red"><span class="color-dot red"></span> Red</label>
+                                <label class="color-pill"><input type="radio" name="color" value="purple"><span class="color-dot purple"></span> Purple</label>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 28px;">
+                            <button type="button" class="btn white" onclick="closeModal('subjectModal')">Cancel</button>
+                            <button type="submit" class="btn">
+                                <i data-lucide="save" style="width: 15px; height: 15px;"></i> Save Subject
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/subjects.js"></script>
+</body>
+</html>

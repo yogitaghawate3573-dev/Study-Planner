@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Study Planner</title>
+    <script>
+        if (localStorage.getItem("sp_logged") === "1") {
+            window.location.replace("dashboard.html");
+        } else {
+            window.location.replace("login.html");
+        }
+    </script>
+</head>
+<body style="font-family: sans-serif; display: grid; place-items: center; height: 100vh; margin: 0; background: #f8fafc; color: #64748b;">
+    <p>Opening Study Planner...</p>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Profile | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html"><span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span><span>Dashboard</span></a>
+                <a href="subjects.html"><span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span><span>Subjects</span></a>
+                <a href="tasks.html"><span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span><span>Tasks</span></a>
+                <a href="schedule.html"><span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span><span>Schedule</span></a>
+                <a href="progress.html"><span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span><span>Progress</span></a>
+                <a href="reports.html"><span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span><span>Reports</span></a>
+                <a class="active" href="profile.html"><span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span><span>Profile</span></a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout();return false"><span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <div class="top">
+                <div>
+                    <h1>Student Profile</h1>
+                    <p>Manage your academic credentials, enrolled degree, and contact settings.</p>
+                </div>
+                <div class="top-right">
+                    <button class="btn white" onclick="openModal('editProfileModal')">
+                        <i data-lucide="edit-3" style="width: 16px; height: 16px;"></i> Edit Profile
+                    </button>
+                    <a class="btn" href="change-password.html">
+                        <i data-lucide="key" style="width: 16px; height: 16px;"></i> Change Password
+                    </a>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Academic Snapshot Ribbon -->
+            <div class="academic-stats-ribbon">
+                <div class="academic-stat-box">
+                    <div class="stat-icon green"><i data-lucide="award"></i></div>
+                    <div>
+                        <small>Current CGPA</small>
+                        <b>8.8 / 10.0</b>
+                    </div>
+                </div>
+
+                <div class="academic-stat-box">
+                    <div class="stat-icon blue"><i data-lucide="calendar-check"></i></div>
+                    <div>
+                        <small>Attendance Rate</small>
+                        <b>94.2%</b>
+                    </div>
+                </div>
+
+                <div class="academic-stat-box">
+                    <div class="stat-icon purple"><i data-lucide="check-circle-2"></i></div>
+                    <div>
+                        <small>Completed Tasks</small>
+                        <b id="profileCompletedTasks">24 Tasks</b>
+                    </div>
+                </div>
+
+                <div class="academic-stat-box">
+                    <div class="stat-icon orange"><i data-lucide="layers"></i></div>
+                    <div>
+                        <small>Enrolled Credits</small>
+                        <b>22 Credits</b>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Details Card -->
+            <div class="profile-card">
+                <div class="profile-layout">
+                    <!-- Left side avatar block -->
+                    <div class="profile-avatar-container">
+                        <div class="profile-badge-wrapper">
+                            <div class="profile-pic" id="profileAvatarPic">YG</div>
+                            <button class="profile-photo-btn" onclick="toast('Profile photo updated!')" title="Change Photo">
+                                <i data-lucide="camera" style="width: 14px; height: 14px;"></i>
+                            </button>
+                        </div>
+                        <div class="profile-info">
+                            <h2 id="profileNameDisplay">Yogita Ghawate</h2>
+                            <span class="sub" id="profileCourseDisplay">BCA • 4th Semester</span>
+                            <div style="margin-top: 8px;">
+                                <span class="pill green"><i data-lucide="check-circle" style="width: 12px; height: 12px;"></i> Active Student</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right side details grid -->
+                    <div class="profile-content-col">
+                        <div class="section-title">
+                            <h3><i data-lucide="user-check" style="width: 18px; height: 18px; color: var(--primary);"></i> Academic & Personal Records</h3>
+                            <button class="btn white" onclick="openModal('editProfileModal')" style="padding: 6px 12px; font-size: 12px;">
+                                <i data-lucide="pencil" style="width: 13px; height: 13px;"></i> Edit Info
+                            </button>
+                        </div>
+
+                        <div class="profile-details-grid">
+                            <div class="profile-detail-item">
+                                <b>Full Name</b>
+                                <span id="detailFullName">Yogita Ghawate</span>
+                            </div>
+                            <div class="profile-detail-item">
+                                <b>Email Address</b>
+                                <span id="detailEmail">yogita@gmail.com</span>
+                            </div>
+                            <div class="profile-detail-item">
+                                <b>Student ID Number</b>
+                                <span id="detailStudentId">STU20240041</span>
+                            </div>
+                            <div class="profile-detail-item">
+                                <b>Course / Program</b>
+                                <span id="detailCourse">Bachelor of Computer Applications (BCA)</span>
+                            </div>
+                            <div class="profile-detail-item">
+                                <b>Academic Term</b>
+                                <span id="detailSemester">4th Semester</span>
+                            </div>
+                            <div class="profile-detail-item">
+                                <b>Contact Number</b>
+                                <span id="detailPhone">+91 98765 43210</span>
+                            </div>
+                        </div>
+
+                        <!-- Action buttons -->
+                        <div class="profile-actions">
+                            <button class="btn white" onclick="openModal('editProfileModal')">
+                                <i data-lucide="edit" style="width: 15px; height: 15px;"></i> Edit Profile Details
+                            </button>
+                            <a class="btn" href="change-password.html">
+                                <i data-lucide="shield" style="width: 15px; height: 15px;"></i> Manage Password & Security
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Edit Profile Modal -->
+            <div id="editProfileModal" class="modal-backdrop">
+                <div class="modal">
+                    <div class="section" style="margin-bottom: 20px;">
+                        <h2><i data-lucide="user-cog" style="width: 20px; height: 20px; color: var(--primary);"></i> Edit Student Profile</h2>
+                        <button class="btn white" onclick="closeModal('editProfileModal')" style="padding: 6px; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                            <i data-lucide="x" style="width: 16px; height: 16px;"></i>
+                        </button>
+                    </div>
+
+                    <form onsubmit="handleSaveProfile(event)">
+                        <div class="form2">
+                            <div class="field">
+                                <label>Full Name *</label>
+                                <input id="editName" name="name" required placeholder="Full Name">
+                            </div>
+                            <div class="field">
+                                <label>Student ID *</label>
+                                <input id="editStudentId" name="studentId" required placeholder="Student ID">
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Email Address *</label>
+                            <input id="editEmail" name="email" type="email" required placeholder="Email Address">
+                        </div>
+
+                        <div class="form2">
+                            <div class="field">
+                                <label>Course / Program</label>
+                                <select id="editCourse" name="course">
+                                    <option value="Bachelor of Computer Applications (BCA)">BCA</option>
+                                    <option value="B.Tech Computer Science (CSE)">B.Tech CSE</option>
+                                    <option value="B.Sc Information Technology">B.Sc IT</option>
+                                    <option value="Master of Computer Applications (MCA)">MCA</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Semester</label>
+                                <select id="editSemester" name="semester">
+                                    <option value="4th Semester">4th Semester</option>
+                                    <option value="1st Semester">1st Semester</option>
+                                    <option value="2nd Semester">2nd Semester</option>
+                                    <option value="3rd Semester">3rd Semester</option>
+                                    <option value="5th Semester">5th Semester</option>
+                                    <option value="6th Semester">6th Semester</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input id="editPhone" name="phone" placeholder="+91 98765 43210">
+                        </div>
+
+                        <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
+                            <button type="button" class="btn white" onclick="closeModal('editProfileModal')">Cancel</button>
+                            <button type="submit" class="btn">
+                                <i data-lucide="save" style="width: 15px; height: 15px;"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

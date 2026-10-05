@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Add Task | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/add-task.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a href="dashboard.html"><span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span><span>Dashboard</span></a>
+                <a href="subjects.html"><span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span><span>Subjects</span></a>
+                <a class="active" href="tasks.html"><span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span><span>Tasks</span></a>
+                <a href="schedule.html"><span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span><span>Schedule</span></a>
+                <a href="progress.html"><span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span><span>Progress</span></a>
+                <a href="reports.html"><span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span><span>Reports</span></a>
+                <a href="profile.html"><span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span><span>Profile</span></a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout();return false"><span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span><span>Logout</span></a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <div class="top">
+                <div>
+                    <h1>Create Study Task</h1>
+                    <p>Assign topics, lab assignments, or exam revisions to your subjects.</p>
+                </div>
+                <div class="top-right">
+                    <a class="btn white" href="tasks.html">
+                        <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Back to Tasks
+                    </a>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Balanced 2-Column Workspace Grid -->
+            <div class="add-task-grid">
+                <!-- Left Form Card -->
+                <div class="add-task-card">
+                    <div class="form-header">
+                        <h2><i data-lucide="pen-tool" style="width: 18px; height: 18px; color: var(--primary);"></i> Task Details</h2>
+                        <span style="font-size: 12px; color: var(--muted);">Fill in all essential topic fields</span>
+                    </div>
+
+                    <form onsubmit="saveTask(event)">
+                        <div class="field">
+                            <label>Task Title *</label>
+                            <div class="input-with-icon">
+                                <i data-lucide="type" class="field-icon"></i>
+                                <input name="title" required placeholder="e.g. Chapter 4 Practice Questions & Notes">
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <label>Subject Course *</label>
+                            <div class="input-with-icon">
+                                <i data-lucide="book" class="field-icon"></i>
+                                <select name="subject" required>
+                                    <option>Database Management System</option>
+                                    <option>Java Programming</option>
+                                    <option>Computer Networks</option>
+                                    <option>Operating Systems</option>
+                                    <option>Web Development</option>
+                                    <option>Mathematics</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="field">
+                            <label>Study Notes or Key Objectives</label>
+                            <textarea name="description" placeholder="Write any specific pages, lab requirements, or formulas to remember..."></textarea>
+                        </div>
+                        
+                        <div class="form2">
+                            <div class="field">
+                                <label>Target Due Date *</label>
+                                <div class="input-with-icon">
+                                    <i data-lucide="calendar" class="field-icon"></i>
+                                    <input name="due" type="date" required id="taskDueDateInput">
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label>Estimated Study Time</label>
+                                <div class="input-with-icon">
+                                    <i data-lucide="clock" class="field-icon"></i>
+                                    <select name="time">
+                                        <option value="30 mins">30 minutes</option>
+                                        <option value="1 hour" selected>1 hour</option>
+                                        <option value="1.5 hours">1.5 hours</option>
+                                        <option value="2 hours">2 hours</option>
+                                        <option value="3 hours">3 hours</option>
+                                        <option value="4+ hours">4+ hours</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form2">
+                            <div class="field">
+                                <label>Priority Level</label>
+                                <div class="priority-picker">
+                                    <label class="prio-pill">
+                                        <input type="radio" name="priority" value="Low">
+                                        <span class="prio-badge blue">Low</span>
+                                    </label>
+                                    <label class="prio-pill">
+                                        <input type="radio" name="priority" value="Medium" checked>
+                                        <span class="prio-badge orange">Medium</span>
+                                    </label>
+                                    <label class="prio-pill">
+                                        <input type="radio" name="priority" value="High">
+                                        <span class="prio-badge red">High</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <label>Initial Status</label>
+                                <div class="input-with-icon">
+                                    <i data-lucide="check-circle" class="field-icon"></i>
+                                    <select name="status">
+                                        <option value="Pending" selected>Pending</option>
+                                        <option value="Completed">Completed</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="add-task-actions">
+                            <a class="btn white" href="tasks.html">Cancel</a>
+                            <button type="submit" class="btn">
+                                <i data-lucide="save" style="width: 16px; height: 16px;"></i> Save Task
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Right Strategy & Tips Companion Card -->
+                <div class="add-task-sidebar">
+                    <div class="card tip-card">
+                        <div class="tip-header">
+                            <div class="tip-icon"><i data-lucide="sparkles"></i></div>
+                            <div>
+                                <h3>Productivity Guidelines</h3>
+                                <small>Best practices for efficient study</small>
+                            </div>
+                        </div>
+
+                        <div class="tip-list">
+                            <div class="tip-item">
+                                <i data-lucide="clock" style="color: var(--primary);"></i>
+                                <div>
+                                    <b>The 25-5 Pomodoro Rule</b>
+                                    <p>Study for 25 minutes with full focus, then take a 5-minute break to retain more knowledge.</p>
+                                </div>
+                            </div>
+
+                            <div class="tip-item">
+                                <i data-lucide="flag" style="color: var(--red);"></i>
+                                <div>
+                                    <b>Prioritize High Urgency</b>
+                                    <p>Tackle High priority topics earlier in your week when focus levels are highest.</p>
+                                </div>
+                            </div>
+
+                            <div class="tip-item">
+                                <i data-lucide="check-check" style="color: var(--green);"></i>
+                                <div>
+                                    <b>Bite-sized Milestones</b>
+                                    <p>Break down large exam syllabus chapters into tasks under 2 hours for steady momentum.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/tasks.js"></script>
+    <script>
+        // Set default due date to tomorrow
+        document.addEventListener("DOMContentLoaded", () => {
+            const dateInput = document.getElementById("taskDueDateInput");
+            if (dateInput && !dateInput.value) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                dateInput.value = tomorrow.toISOString().split('T')[0];
+            }
+        });
+    </script>
+</body>
+</html>

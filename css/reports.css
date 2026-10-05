@@ -1,0 +1,182 @@
+/* Reports Specific Styles */
+
+.print-header {
+    display: none;
+}
+
+.chart-container {
+    height: 220px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 20px 8px 10px;
+    background: linear-gradient(180deg, rgba(248, 250, 252, 0.4) 0%, rgba(248, 250, 252, 0.9) 100%);
+    border-radius: var(--radius-sm);
+    border-bottom: 2px solid var(--line);
+}
+
+.chart-bar-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.chart-val {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    transition: var(--transition);
+}
+
+.chart-bar-wrapper:hover .chart-val {
+    color: var(--primary);
+    transform: translateY(-2px);
+    font-weight: 800;
+}
+
+.chart-bar {
+    width: 100%;
+    max-width: 38px;
+    background: var(--primary-gradient);
+    border-radius: 6px 6px 0 0;
+    position: relative;
+    transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease;
+    min-height: 6px;
+}
+
+.chart-bar:hover {
+    background: linear-gradient(180deg, #4834ea 0%, #664ffb 100%);
+    transform: scaleX(1.08);
+}
+
+.chart-bar-wrapper > span:last-child {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* Donut & Distribution Ratio Card */
+.ratio-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    min-height: 290px;
+}
+
+.donut-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0 16px;
+}
+
+.ratio-ring {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: conic-gradient(var(--green) 0% 75%, var(--orange) 75% 100%);
+    display: grid;
+    place-items: center;
+    position: relative;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.ratio-inner {
+    width: 104px;
+    height: 104px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.ratio-ring-text {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text);
+    line-height: 1;
+    letter-spacing: -0.5px;
+}
+
+.ratio-inner small {
+    font-size: 10.5px;
+    color: var(--muted);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 3px;
+}
+
+.donut-legend {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: auto;
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt;
+    }
+
+    .sidebar, 
+    .mobile-nav-bar, 
+    .top-right,
+    .top button,
+    .btn,
+    .view,
+    .toast {
+        display: none !important;
+    }
+
+    .main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+
+    .print-header {
+        display: block !important;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #000000;
+    }
+
+    .print-header h2 {
+        font-size: 18pt;
+        margin-bottom: 4px;
+    }
+
+    .print-header p {
+        font-size: 11pt;
+        color: #333333;
+    }
+
+    .card {
+        box-shadow: none !important;
+        border: 1px solid #cccccc !important;
+        break-inside: avoid;
+        margin-bottom: 20px;
+    }
+
+    .grid {
+        gap: 16px;
+    }
+}

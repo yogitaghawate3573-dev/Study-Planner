@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Dashboard | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body>
+    <div class="app">
+        <!-- Mobile Navigation Header -->
+        <header class="mobile-nav-bar">
+            <button id="mobileMenuBtn" aria-label="Toggle Menu"><i data-lucide="menu"></i></button>
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 17px; height: 17px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <div style="width: 24px;"></div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-mark"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></div>
+                <span>Study Planner</span>
+            </div>
+            <nav class="nav">
+                <a class="active" href="dashboard.html">
+                    <span class="ico"><i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i></span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="subjects.html">
+                    <span class="ico"><i data-lucide="book-open" style="width: 18px; height: 18px;"></i></span>
+                    <span>Subjects</span>
+                </a>
+                <a href="tasks.html">
+                    <span class="ico"><i data-lucide="check-square" style="width: 18px; height: 18px;"></i></span>
+                    <span>Tasks</span>
+                </a>
+                <a href="schedule.html">
+                    <span class="ico"><i data-lucide="calendar" style="width: 18px; height: 18px;"></i></span>
+                    <span>Schedule</span>
+                </a>
+                <a href="progress.html">
+                    <span class="ico"><i data-lucide="trending-up" style="width: 18px; height: 18px;"></i></span>
+                    <span>Progress</span>
+                </a>
+                <a href="reports.html">
+                    <span class="ico"><i data-lucide="bar-chart-2" style="width: 18px; height: 18px;"></i></span>
+                    <span>Reports</span>
+                </a>
+                <a href="profile.html">
+                    <span class="ico"><i data-lucide="user" style="width: 18px; height: 18px;"></i></span>
+                    <span>Profile</span>
+                </a>
+            </nav>
+            <div class="logout">
+                <a href="#" onclick="logout(); return false">
+                    <span class="ico"><i data-lucide="log-out" style="width: 18px; height: 18px;"></i></span>
+                    <span>Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main">
+            <div class="top">
+                <div>
+                    <h1 id="userGreeting">Hello, Yogita 👋</h1>
+                    <p id="userSub">Track your subjects, manage tasks, and plan your study routine.</p>
+                </div>
+                <div class="top-right">
+                    <a href="add-task.html" class="btn" style="padding: 8px 16px;">
+                        <i data-lucide="plus" style="width: 16px; height: 16px;"></i> Add Task
+                    </a>
+                    <div class="date-box">
+                        <b>--</b><br>
+                        <span>--</span>
+                    </div>
+                    <a href="profile.html" class="avatar" title="View Profile">YG</a>
+                </div>
+            </div>
+
+            <!-- Stats Widgets -->
+            <div class="dashboard-stats">
+                <div class="dashboard-stat-card">
+                    <div class="info">
+                        <small>Total Subjects</small>
+                        <b id="totalSubjects">6</b>
+                        <span class="stat-trend neutral">Active Semester</span>
+                    </div>
+                    <div class="dashboard-stat-icon"><i data-lucide="book"></i></div>
+                </div>
+
+                <div class="dashboard-stat-card">
+                    <div class="info">
+                        <small>Completed Tasks</small>
+                        <b id="completedTasks">24</b>
+                        <span class="stat-trend positive"><i data-lucide="trending-up" style="width: 12px; height: 12px;"></i> Great Pace</span>
+                    </div>
+                    <div class="dashboard-stat-icon green"><i data-lucide="check-circle-2"></i></div>
+                </div>
+
+                <div class="dashboard-stat-card">
+                    <div class="info">
+                        <small>Pending Tasks</small>
+                        <b id="pendingTasks">8</b>
+                        <span class="stat-trend warning"><i data-lucide="clock" style="width: 12px; height: 12px;"></i> In Progress</span>
+                    </div>
+                    <div class="dashboard-stat-icon orange"><i data-lucide="clock"></i></div>
+                </div>
+
+                <div class="dashboard-stat-card">
+                    <div class="info">
+                        <small>Overall Progress</small>
+                        <b id="overallProgress">75%</b>
+                        <div class="stat-mini-bar">
+                            <div id="statProgressBar" class="stat-mini-bar-fill" style="width: 75%;"></div>
+                        </div>
+                    </div>
+                    <div class="dashboard-stat-icon blue"><i data-lucide="pie-chart"></i></div>
+                </div>
+            </div>
+
+            <!-- Dashboard Content Columns -->
+            <div class="grid cols2">
+                <div class="card">
+                    <div class="section">
+                        <h2><i data-lucide="list-todo" style="width: 18px; height: 18px; color: var(--primary);"></i> Today's Tasks</h2>
+                        <a class="view" href="tasks.html">View All <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></a>
+                    </div>
+                    <div class="table-responsive">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Task Detail</th>
+                                    <th>Priority</th>
+                                    <th>Status</th>
+                                    <th style="text-align: right;">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="todayTaskBody">
+                                <!-- Loaded Dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="section">
+                        <h2><i data-lucide="alarm-clock" style="width: 18px; height: 18px; color: var(--orange);"></i> Upcoming Deadlines</h2>
+                        <a class="view" href="tasks.html">View All <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></a>
+                    </div>
+                    <div class="deadline-list" id="upcomingList">
+                        <!-- Loaded Dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid cols2">
+                <div class="card">
+                    <div class="section">
+                        <h2><i data-lucide="bar-chart-3" style="width: 18px; height: 18px; color: var(--green);"></i> Subject Progress</h2>
+                        <a class="view" href="progress.html">View All <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></a>
+                    </div>
+                    <div id="subjectProgressList">
+                        <!-- Loaded Dynamically -->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="section">
+                        <h2><i data-lucide="activity" style="width: 18px; height: 18px; color: var(--primary);"></i> Weekly Study Hours</h2>
+                        <a class="view" href="reports.html">Detailed Report <i data-lucide="chevron-right" style="width: 14px; height: 14px;"></i></a>
+                    </div>
+                    <div class="chart-wrapper">
+                        <div class="chart-container">
+                            <div class="chart-bar-wrapper">
+                                <span class="chart-val">3.5h</span>
+                                <div class="chart-bar" style="height: 55%"></div>
+                                <span>Mon</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <span class="chart-val">4.5h</span>
+                                <div class="chart-bar" style="height: 75%"></div>
+                                <span>Tue</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <span class="chart-val">5.5h</span>
+                                <div class="chart-bar" style="height: 90%"></div>
+                                <span>Wed</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <span class="chart-val">4.0h</span>
+                                <div class="chart-bar" style="height: 65%"></div>
+                                <span>Thu</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <span class="chart-val">5.0h</span>
+                                <div class="chart-bar" style="height: 80%"></div>
+                                <span>Fri</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <span class="chart-val">3.0h</span>
+                                <div class="chart-bar" style="height: 50%"></div>
+                                <span>Sat</span>
+                            </div>
+                            <div class="chart-bar-wrapper">
+                                <span class="chart-val">2.0h</span>
+                                <div class="chart-bar" style="height: 35%"></div>
+                                <span>Sun</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

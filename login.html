@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#5c45fd">
+    <title>Login | Study Planner</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="auth-page">
+        <!-- Left Side content (scenic graphic overlay & typography copy) -->
+        <section class="auth-left">
+            <div class="auth-brand">
+                <div class="auth-brand-logo">
+                    <i data-lucide="book-open" style="width: 22px; height: 22px; stroke-width: 2.5px;"></i>
+                </div>
+                <div>
+                    <h2>Study Planner</h2>
+                    <p>Plan. Study. Achieve.</p>
+                </div>
+            </div>
+
+            <div class="hero-copy">
+                <div class="hero-tag">
+                    <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i> Intelligent Academic Assistant
+                </div>
+                <h1>Plan your study.<br>Track your progress.<br><span>Achieve</span> your goals.</h1>
+                <p>Stay effortlessly organized, manage deadlines, and unlock your true academic potential with real-time analytics.</p>
+                
+                <div class="hero-badges">
+                    <div class="hero-pill">
+                        <i data-lucide="check-circle" style="width: 15px; height: 15px; color: var(--green);"></i> 100% Offline Ready
+                    </div>
+                    <div class="hero-pill">
+                        <i data-lucide="award" style="width: 15px; height: 15px; color: var(--primary);"></i> Top Student Choice
+                    </div>
+                    <div class="hero-pill">
+                        <i data-lucide="shield-check" style="width: 15px; height: 15px; color: var(--blue);"></i> Private & Secure
+                    </div>
+                </div>
+            </div>
+
+            <div class="secure-badge">
+                <div class="secure-icon">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <div>
+                    <strong>Your Progress is Always Saved</strong>
+                    <span>Instant client-side persistence for fast, uninterrupted study.</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Side content (glassmorphism login card) -->
+        <section class="auth-right">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <div class="auth-logo">
+                        <i data-lucide="book-open" style="width: 24px; height: 24px; stroke-width: 2.2px;"></i>
+                    </div>
+                    <h1>Welcome Back 👋</h1>
+                    <p>Enter your student credentials to continue</p>
+                </div>
+                
+                <form id="loginForm" class="auth-form">
+                    <div class="field">
+                        <label>Email or Student ID</label>
+                        <div class="input-group">
+                            <i data-lucide="user" class="input-icon"></i>
+                            <input id="loginUser" type="text" required placeholder="e.g. yogita@gmail.com" value="yogita@gmail.com">
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label>Password</label>
+                        <div class="input-group">
+                            <i data-lucide="lock" class="input-icon"></i>
+                            <input id="password" required type="password" placeholder="Enter password" value="student123">
+                            <button type="button" class="password-toggle" onclick="togglePassword('password', this)" title="Show/Hide Password">
+                                <i data-lucide="eye" style="width: 18px; height: 18px;"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="auth-options">
+                        <label>
+                            <input type="checkbox" checked> Remember Me
+                        </label>
+                        <a href="#" class="forgot-pass" onclick="toast('Demo: Use password student123', 'info', 'Forgot Password'); return false;">Forgot Password?</a>
+                    </div>
+                    
+                    <button type="submit" class="auth-submit">
+                        <i data-lucide="log-in" style="width: 16px; height: 16px;"></i> Login to Workspace
+                    </button>
+                </form>
+                
+                <div class="auth-footer">
+                    Don't have an account? <a href="register.html">Sign Up</a>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <div id="toast" class="toast"></div>
+
+    <script src="js/common.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
